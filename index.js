@@ -9,7 +9,7 @@ async function askToServer() {
     try {
         const serverResponse = await fetch(`https:/ansd`, fetchConfig);
         if (!serverResponse.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${serverResponse.status}`);
         }
         const cleanedAnswer = await serverResponse.json()
         console.log(cleanedAnswer)
