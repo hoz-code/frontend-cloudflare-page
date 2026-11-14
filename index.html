@@ -1,33 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guarda tu palabra</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel CRUD - Estilo Obsidian</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <div class="card">
-    <h1>Guarda la palabra que tú quieras</h1>
-    
-    <form id="wordForm">
-      <input 
-        type="text" 
-        id="wordInput" 
-        placeholder="Escribe una palabra..." 
-        required 
-        autocomplete="off"
-      >
-      <button type="submit">Guardar</button>
-    </form>
+    <main class="crud-grid">
+        <!-- Módulo Superior Izquierdo: CREAR (Guardar) -->
+        <section class="module">
+            <div class="card">
+                <div class="card-header">
+                    <span class="badge badge-create">CREATE</span>
+                    <h2>Nuevo Registro</h2>
+                </div>
+                <form class="crud-form" onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <label for="input-guardar">Palabras (Máx. 50 caracteres, sin símbolos)</label>
+                        <input 
+                            type="text" 
+                            id="input-guardar" 
+                            placeholder="Ej. Notas del proyecto" 
+                            maxlength="50" 
+                            pattern="^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]+$" 
+                            title="Solo se permiten letras, números y espacios (máximo 50 caracteres)."
+                            required
+                        >
+                        <span class="helper-text">Solo letras y espacios. Sin caracteres especiales.</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </section>
 
-    <div class="result-container">
-      <p>Palabra guardada:</p>
-      <span id="savedWordDisplay">Ninguna palabra guardada aún</span>
-    </div>
-  </div>
+        <!-- Módulo Superior Derecho: ACTUALIZAR -->
+        <section class="module">
+            <div class="card">
+                <div class="card-header">
+                    <span class="badge badge-update">UPDATE</span>
+                    <h2>Modificar Registro</h2>
+                </div>
+                <form class="crud-form" onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <label for="input-actualizar-id">ID Numérico</label>
+                        <input 
+                            type="number" 
+                            id="input-actualizar-id" 
+                            placeholder="Ej. 104" 
+                            min="1"
+                            required
+                        >
+                    </div>
+                    <div class="input-group">
+                        <label for="input-actualizar-texto">Nuevo Texto</label>
+                        <input 
+                            type="text" 
+                            id="input-actualizar-texto" 
+                            placeholder="Escribe el nuevo contenido..." 
+                            maxlength="50"
+                            pattern="^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]+$"
+                            title="Solo se permiten letras, números y espacios."
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </form>
+            </div>
+        </section>
 
-  <script src="script.js"></script>
+        <!-- Módulo Inferior Izquierdo: CONSULTAR (Leer) -->
+        <section class="module">
+            <div class="card">
+                <div class="card-header">
+                    <span class="badge badge-read">READ</span>
+                    <h2>Buscar Registro</h2>
+                </div>
+                <form class="crud-form" onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <label for="input-consultar-id">ID Numérico a Consultar</label>
+                        <input 
+                            type="number" 
+                            id="input-consultar-id" 
+                            placeholder="Ingresa el número de ID" 
+                            min="1"
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Consultar</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Módulo Inferior Derecho: ELIMINAR -->
+        <section class="module">
+            <div class="card">
+                <div class="card-header">
+                    <span class="badge badge-delete">DELETE</span>
+                    <h2>Borrar Registro</h2>
+                </div>
+                <form class="crud-form" onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <label for="input-eliminar-id">ID Numérico a Eliminar</label>
+                        <input 
+                            type="number" 
+                            id="input-eliminar-id" 
+                            placeholder="Ingresa el número de ID" 
+                            min="1"
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
 </body>
 </html>

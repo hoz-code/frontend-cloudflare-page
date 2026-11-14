@@ -1,91 +1,206 @@
+/* Variables inspiradas en el tema oscuro de Obsidian en Windows */
+:root {
+    --bg-primary: #1e1e1e;        /* Fondo principal del editor */
+    --bg-secondary: #262626;      /* Fondo de tarjetas / paneles laterales */
+    --bg-input: #161616;          /* Fondo de cajas de texto */
+    --border-color: #363636;      /* Líneas divisorias sutiles */
+    --text-normal: #dcddde;       /* Texto principal */
+    --text-muted: #888888;        /* Etiquetas y texto secundario */
+    --accent-purple: #7f6df2;     /* Morado principal de Obsidian */
+    --accent-hover: #8e7ef5;      /* Morado al pasar el cursor */
+    --danger-color: #e05252;      /* Rojo suave para eliminar */
+    --danger-hover: #eb6565;
+    --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+}
+
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
+    background-color: var(--bg-primary);
+    color: var(--text-normal);
+    font-family: var(--font-ui);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Mantiene la pantalla fija en los 4 cuadrantes */
 }
 
+/* Cuadrícula 2x2 que divide la pantalla vertical y horizontalmente */
+.crud-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--border-color); /* Crea las líneas divisorias centrales */
+    gap: 1px; /* Grosor de la línea divisoria entre los 4 módulos */
+}
+
+/* Contenedor de cada cuadrante */
+.module {
+    background-color: var(--bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Tarjeta interna estilo panel de Obsidian */
 .card {
-  background-color: #ffffff;
-  padding: 40px 30px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  max-width: 420px;
-  text-align: center;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.75rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-h1 {
-  color: #333333;
-  font-size: 1.5rem;
-  margin-bottom: 25px;
+.card:hover {
+    border-color: #4a4a4a;
 }
 
-form {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
-input[type="text"] {
-  flex: 1;
-  padding: 12px 15px;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.2s ease;
+.card-header h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-normal);
+    letter-spacing: 0.2px;
 }
 
-input[type="text"]:focus {
-  border-color: #667eea;
+/* Etiquetas indicadoras de acción CRUD */
+.badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    letter-spacing: 0.6px;
 }
 
-button {
-  background-color: #667eea;
-  color: #ffffff;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+.badge-create { background: rgba(127, 109, 242, 0.18); color: #a599f9; }
+.badge-update { background: rgba(224, 172, 105, 0.18); color: #e0ac69; }
+.badge-read   { background: rgba(82, 173, 224, 0.18);  color: #52ade0; }
+.badge-delete { background: rgba(224, 82, 82, 0.18);   color: #e05252; }
+
+/* Formulario y controles */
+.crud-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-button:hover {
-  background-color: #5a67d8;
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 }
 
-button:active {
-  transform: scale(0.98);
+label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
 }
 
-.result-container {
-  background-color: #f7fafc;
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px dashed #cbd5e0;
+input {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 0.65rem 0.8rem;
+    color: var(--text-normal);
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.result-container p {
-  font-size: 0.875rem;
-  color: #718096;
-  margin-bottom: 5px;
+input::placeholder {
+    color: #555555;
 }
 
-#savedWordDisplay {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #2d3748;
-  word-break: break-all;
+input:focus {
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 2px rgba(127, 109, 242, 0.25);
+}
+
+/* Resalta en rojo si el usuario introduce caracteres especiales no permitidos */
+input:invalid:not(:placeholder-shown) {
+    border-color: var(--danger-color);
+    box-shadow: 0 0 0 2px rgba(224, 82, 82, 0.2);
+}
+
+.helper-text {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+/* Botones */
+.btn {
+    margin-top: 0.25rem;
+    padding: 0.65rem 1rem;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+.btn:active {
+    transform: scale(0.99);
+}
+
+.btn-primary {
+    background-color: var(--accent-purple);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+    background-color: #323232;
+    color: var(--text-normal);
+    border-color: #454545;
+}
+
+.btn-secondary:hover {
+    background-color: #3d3d3d;
+}
+
+.btn-danger {
+    background-color: rgba(224, 82, 82, 0.15);
+    color: var(--danger-color);
+    border-color: rgba(224, 82, 82, 0.4);
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-color);
+    color: #ffffff;
+}
+
+/* Adaptación para pantallas pequeñas o móviles */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+    }
+    .crud-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        height: auto;
+    }
 }
