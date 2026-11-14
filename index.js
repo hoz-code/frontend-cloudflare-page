@@ -5,7 +5,7 @@ testServerBtn.onclick = askToServer;
 
 
 async function askToServer() {
-    const fetchConfig = { method: "GET", headers: { "Content-Type": "application/json" } };
+    const fetchConfig = { method: "GET" };
     try {
         const serverResponse = await fetch(`https://api.hozpage.com/ansd`, fetchConfig);
         if (!serverResponse.ok) {
