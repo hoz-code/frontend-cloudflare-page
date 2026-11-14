@@ -7,7 +7,7 @@ testServerBtn.onclick = askToServer;
 async function askToServer() {
     const fetchConfig = { method: "GET", headers: { "Content-Type": "application/json" } };
     try {
-        const serverResponse = await fetch(`https:/ans`, fetchConfig);
+        const serverResponse = await fetch(`https:/ansd`, fetchConfig);
         if (!serverResponse.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
